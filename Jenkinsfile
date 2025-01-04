@@ -13,15 +13,31 @@ pipeline {
         DOCKERHUB_PSW = credentials('dockerhub')
         APP_EXPOSED_PORT = "${PARAM_PORT_EXPOSED}"            /*80 by default*/
 
-        STG_API_ENDPOINT = "ip10-0-73-4-crok3hj9jotg00drp9v0-1993.direct.docker.labs.eazytraining.fr"
-        STG_APP_ENDPOINT = "ip10-0-73-4-crok3hj9jotg00drp9v0-80.direct.docker.labs.eazytraining.fr"
-        PROD_API_ENDPOINT = "ip10-0-73-5-crok3hj9jotg00drp9v0-1993.direct.docker.labs.eazytraining.fr"
-        PROD_APP_ENDPOINT = "ip10-0-73-5-crok3hj9jotg00drp9v0-80.direct.docker.labs.eazytraining.fr"
+        STG_API_ENDPOINT = "${PARAM_STG_API_ENDPOINT}"
+        STG_APP_ENDPOINT = "${PARAM_STG_APP_ENDPOINT}"
+        PROD_API_ENDPOINT = "${PARAM_PROD_API_ENDPOINT}"
+        PROD_APP_ENDPOINT = "${PARAM_PROD_APP_ENDPOINT}"
         
         INTERNAL_PORT = "${PARAM_INTERNAL_PORT}"              /*5000 ny default*/
         EXTERNAL_PORT = "${PARAM_PORT_EXPOSED}"
         CONTAINER_IMAGE = "${DOCKERHUB_USR}/${IMAGE_NAME}:${IMAGE_TAG}"
     }
+
+    parameters {
+        // booleanParam(name: "RELEASE", defaultValue: false)
+        // choice(name: "DEPLOY_TO", choices: ["", "INT", "PRE", "PROD"])
+        string(name: 'PARAM_APP_NAME', defaultValue: 'abdelhamid', description: 'App Name')
+        string(name: 'PARAM_IMAGE_NAME', defaultValue: 'static-web', description: 'Image Name')
+        string(name: 'PARAM_IMAGE_TAG', defaultValue: 'v2', description: 'Image Tag')
+        string(name: 'PARAM_PORT_EXPOSED', defaultValue: '8060', description: 'APP EXPOSED PORT')
+        string(name: 'PARAM_INTERNAL_PORT', defaultValue: '80', description: 'APP INTERNAL PORT')
+        string(name: 'PARAM_DOCKERHUB_ID', defaultValue: 'olivierkkoc', description: 'dockerhub')
+        string(name: 'PARAM_STG_API_ENDPOINT', defaultValue: '3.80.158.216:1993', description: 'STG EAZYLABS API')
+        string(name: 'PARAM_STG_APP_ENDPOINT', defaultValue: '3.80.158.216', description: 'STG EAZYLABS APP')
+        string(name: 'PARAM_PROD_API_ENDPOINT', defaultValue: '3.94.159.126:1993', description: 'PROD EAZYLABS API')
+        string(name: 'PARAM_PROD_APP_ENDPOINT', defaultValue: '3.94.159.126', description: 'PROD EAZYLABS APP')
+    }
+
     agent none
     stages {
         stage('Build image') {
