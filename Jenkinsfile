@@ -22,7 +22,7 @@ pipeline {
         EXTERNAL_PORT = "${PARAM_PORT_EXPOSED}"
         CONTAINER_IMAGE = "${DOCKERHUB_USR}/${IMAGE_NAME}:${IMAGE_TAG}"
     }
-
+    /*
     parameters {
         // booleanParam(name: "RELEASE", defaultValue: false)
         // choice(name: "DEPLOY_TO", choices: ["", "INT", "PRE", "PROD"])
@@ -37,7 +37,7 @@ pipeline {
         string(name: 'PARAM_PROD_API_ENDPOINT', defaultValue: '3.94.159.126:1993', description: 'PROD EAZYLABS API')
         string(name: 'PARAM_PROD_APP_ENDPOINT', defaultValue: '3.94.159.126', description: 'PROD EAZYLABS APP')
     }
-
+    */
     agent none
     stages {
         stage('Build image') {
