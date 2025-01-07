@@ -5,7 +5,7 @@ pipeline {
 
         IMAGE_NAME = "${PARAM_IMAGE_NAME}"                    /*staticwebsite*/
         APP_NAME = "${PARAM_APP_NAME}"                        /*younesabdh*/
-        IMAGE_TAG = "${PARAM_IMAGE_TAG}"                      /*latest*/
+        IMAGE_TAG = "${PARAM_IMAGE_TAG}"                      /*v2*/
         
         STAGING = "${PARAM_APP_NAME}-staging"
         PRODUCTION = "${PARAM_APP_NAME}-prod"
